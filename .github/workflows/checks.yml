@@ -1,0 +1,16 @@
+---
+name: Checks
+
+on: [push]  # тригер, срабатывающий на любую push-опреацию
+
+jobs:
+  test-lint:
+    name: Test and Lint  # будет отображаться внутри интерфейса GitHub
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Test
+        run: docker-compose run --rm app sh -c "python manage.py test"
+      - name: Lint
+        run: docker-compose run --rm app sh -c "flake8"
