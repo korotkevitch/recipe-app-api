@@ -9,6 +9,7 @@ WORKDIR /app
 EXPOSE 8000
 
 ARG DEV=false
+# вирт. окружение помещается в каталог py
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
     /py/bin/pip install -r /tmp/requirements.txt && \
@@ -20,5 +21,7 @@ RUN python -m venv /py && \
         --disabled-password \
         --no-create-home \
         django-user
+
+# в Linux bash лежит в /bin/bash
 ENV PATH="/py/bin:$PATH"
 USER django-user
